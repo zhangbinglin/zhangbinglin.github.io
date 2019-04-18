@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +10,74 @@
         body {
             margin: 200px;
         }
+
         .wrapper {
             position: relative;
         }
+
         .center {
             width: 50px;
             height: 50px;
+            background: blue;
             border-radius: 50%;
             position: absolute;
             top: 0;
             left: 0;
             cursor: pointer;
-            z-index: 2;
         }
+        .ani {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        .ani::before, .ani::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .ani:nth-child(1)::before {
+            background: rgb(37, 161, 170);
+            animation: flash 5s linear infinite;
+        }
+        .ani:nth-child(2)::before {
+            background: rgb(31, 113, 206);
+            animation: flash 4s linear infinite;
+        }
+        .ani:nth-child(1)::after {
+            background: rgb(233, 233, 17);
+            animation: flash 3s linear infinite;
+        }
+        .ani:nth-child(2)::after {
+            background: rgb(255, 15, 15);
+            animation: flash 2s linear infinite;
+        }
+
+        @keyframes flash {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            25% {
+                transform: scale(.3);
+                opacity: .3;
+            }
+            50% {
+                transform: scale(.5);
+                opacity: .5;
+            }
+            75% {
+                transform: scale(.7);
+                opacity: .3;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
         .menu {
             width: 50px;
             height: 50px;
@@ -29,44 +85,53 @@
             position: absolute;
             left: 0;
             top: 0;
-            z-index: 1;
             transform-origin: center;
             transition: transform .5s;
         }
+
         .icon0 {
             transform: rotateZ(0deg) translateX(150px);
         }
+
         .icon1 {
             transform: rotateZ(-30deg) translateX(150px);
         }
+
         .icon2 {
             transform: rotateZ(-60deg) translateX(150px);
         }
+
         .icon3 {
             transform: rotateZ(-90deg) translateX(150px);
         }
+
         .icon4 {
             transform: rotateZ(-120deg) translateX(150px);
         }
     </style>
 </head>
+
 <body>
     <div class="wrapper">
-        <section class="center" style="background: blue" onclick='hanleClk()'></section>
         <div class="menu" style="background: yellow;"></div>
         <div class="menu" style="background: red;"></div>
         <div class="menu" style="background: blueviolet;"></div>
         <div class="menu" style="background: green;"></div>
         <div class="menu" style="background: palevioletred;"></div>
+        <section class="center" onclick='hanleClk()'>
+            <i class="ani"></i>
+            <i class="ani"></i>
+        </section>
     </div>
     <script>
         var isOn = false
+
         function hanleClk() {
             isOn = !isOn
             const menu = document.querySelectorAll('.menu')
             for (let i = 0, len = menu.length; i < len; i++) {
                 const el = menu[i]
-                if(isOn) {
+                if (isOn) {
                     el.classList.add('icon' + i)
                 } else {
                     el.classList.remove('icon' + i)
@@ -75,4 +140,5 @@
         }
     </script>
 </body>
+
 </html>
