@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 200px;
+        }
+        .wrapper {
+            position: relative;
+        }
+        .center {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .menu {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            transform-origin: center;
+            transition: transform .5s;
+        }
+        .icon0 {
+            transform: rotateZ(0deg) translateX(150px);
+        }
+        .icon1 {
+            transform: rotateZ(-30deg) translateX(150px);
+        }
+        .icon2 {
+            transform: rotateZ(-60deg) translateX(150px);
+        }
+        .icon3 {
+            transform: rotateZ(-90deg) translateX(150px);
+        }
+        .icon4 {
+            transform: rotateZ(-120deg) translateX(150px);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <section class="center" style="background: blue" onclick='hanleClk()'></section>
+        <div class="menu" style="background: yellow;"></div>
+        <div class="menu" style="background: red;"></div>
+        <div class="menu" style="background: blueviolet;"></div>
+        <div class="menu" style="background: green;"></div>
+        <div class="menu" style="background: palevioletred;"></div>
+    </div>
+    <script>
+        var isOn = false
+        function hanleClk() {
+            isOn = !isOn
+            const menu = document.querySelectorAll('.menu')
+            for (let i = 0, len = menu.length; i < len; i++) {
+                const el = menu[i]
+                if(isOn) {
+                    el.classList.add('icon' + i)
+                } else {
+                    el.classList.remove('icon' + i)
+                }
+            }
+        }
+    </script>
+</body>
+</html>
